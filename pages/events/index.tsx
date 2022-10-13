@@ -1,3 +1,4 @@
+import React from "react";
 import { client } from "../../helpers/createClient";
 import styled from "styled-components";
 
@@ -6,12 +7,12 @@ import { EventItem, Layout } from "../../components";
 import { StyledContent } from "../../styles/SharedStyles";
 
 export async function getStaticProps() {
-  const { items } = await client.getEntries({ content_type: "event" });
-  return {
-    props: {
-      events: items,
-    },
-  };
+	const { items } = await client.getEntries({ content_type: "event" });
+	return {
+		props: {
+			events: items,
+		},
+	};
 }
 
 const StyledGrid = styled.div`
@@ -21,15 +22,15 @@ const StyledGrid = styled.div`
 `;
 
 export default function EventsPage({ events }: Events) {
-  return (
-    <Layout>
-      <StyledContent>
-        <StyledGrid>
-          {events.map((event: Event) => (
-            <EventItem event={event} />
-          ))}
-        </StyledGrid>
-      </StyledContent>
-    </Layout>
-  );
+	return (
+		<Layout>
+			<StyledContent>
+				<StyledGrid>
+					{events.map((event: Event) => (
+						<EventItem event={event} key={event.sys.id}/>
+					))}
+				</StyledGrid>
+			</StyledContent>
+		</Layout>
+	);
 }

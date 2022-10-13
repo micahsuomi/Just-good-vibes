@@ -1,3 +1,4 @@
+import React from "react";
 import { client } from "../../helpers/createClient";
 import styled from "styled-components";
 
@@ -6,12 +7,12 @@ import { Layout, ReviewItem } from "../../components";
 import { StyledContent } from "../../styles/SharedStyles";
 
 export async function getStaticProps() {
-  const { items } = await client.getEntries({ content_type: "reviews" });
-  return {
-    props: {
-      reviews: items,
-    },
-  };
+	const { items } = await client.getEntries({ content_type: "reviews" });
+	return {
+		props: {
+			reviews: items,
+		},
+	};
 }
 
 const StyledGrid = styled.div`
@@ -22,16 +23,16 @@ const StyledGrid = styled.div`
 `;
 
 export default function ReviewsPage({ reviews }: Reviews) {
-  return (
-    <Layout>
-      <StyledContent>
-        <h3>Reviews</h3>
-        <StyledGrid>
-          {reviews.map((reviewItem: Review) => {
-            return <ReviewItem review={reviewItem} />;
-          })}
-        </StyledGrid>
-      </StyledContent>
-    </Layout>
-  );
+	return (
+		<Layout>
+			<StyledContent>
+				<h3>Reviews</h3>
+				<StyledGrid>
+					{reviews.map((reviewItem: Review) => {
+						return <ReviewItem review={reviewItem} key={reviewItem.sys.id}/>;
+					})}
+				</StyledGrid>
+			</StyledContent>
+		</Layout>
+	);
 }

@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import moment from "moment";
@@ -48,32 +49,32 @@ const StyledCardIntro = styled.p`
 `;
 
 export const ReviewItem = ({ review }: ReviewItemProps) => {
-  const {
-    title,
-    slug,
-    thumbnail: { fields },
-    rating,
-    excerpt,
-  } = review.fields;
-  return (
-    <Link href={`/reviews/${slug}`} passHref>
-      <StyledLink>
-        <StyledCard key={review.sys.id}>
-          <StyledCardImageWrapper>
-            <StyledCardImage src={fields.file.url} alt={fields.title} />
-          </StyledCardImageWrapper>
-          <StyledCardBody>
-            <StyledDate>
-              {moment(review.sys.createdAt).format("MMMM Do YYYY, h:mm")}
-            </StyledDate>
+	const {
+		title,
+		slug,
+		thumbnail: { fields },
+		rating,
+		excerpt,
+	} = review.fields;
+	return (
+		<Link href={`/reviews/${slug}`} passHref>
+			<StyledLink>
+				<StyledCard key={review.sys.id}>
+					<StyledCardImageWrapper>
+						<StyledCardImage src={fields.file.url} alt={fields.title} />
+					</StyledCardImageWrapper>
+					<StyledCardBody>
+						<StyledDate>
+							{moment(review.sys.createdAt).format("MMMM Do YYYY, h:mm")}
+						</StyledDate>
 
-            <StyledTitle>{title}</StyledTitle>
+						<StyledTitle>{title}</StyledTitle>
 
-            <StyledRating>Rating: {rating}/5</StyledRating>
-            <StyledCardIntro>{excerpt}</StyledCardIntro>
-          </StyledCardBody>
-        </StyledCard>
-      </StyledLink>
-    </Link>
-  );
+						<StyledRating>Rating: {rating}/5</StyledRating>
+						<StyledCardIntro>{excerpt}</StyledCardIntro>
+					</StyledCardBody>
+				</StyledCard>
+			</StyledLink>
+		</Link>
+	);
 };
