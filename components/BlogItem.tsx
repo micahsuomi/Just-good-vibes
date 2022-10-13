@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import moment from "moment";
 
-import { BlogItemProps } from "../types";
+import { PostItemProps } from "../types";
 
 const StyledLink = styled.a`
   text-decoration: none;
@@ -46,7 +46,7 @@ const StyledCreatedAt = styled.span`
 `;
 const StyledTitle = styled.h4`
   margin: 0.6rem 0;
-  color: #1f1e1e;
+  color: var(--color-text-primary);
 `;
 
 const StyledIntro = styled.p`
@@ -58,7 +58,7 @@ const StyledReadingTime = styled.p`
   color: #514949;
   font-size: 14px;
 `;
-export const BlogItem = ({ post }: BlogItemProps) => {
+export const BlogItem = ({ post }: PostItemProps) => {
   const {
     title,
     slug,

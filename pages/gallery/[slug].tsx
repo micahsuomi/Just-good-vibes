@@ -2,13 +2,12 @@ import Link from "next/link";
 import { client } from "../../helpers/createClient";
 import styled from "styled-components";
 
-import { GalleryPhoto } from "../../types";
+import { GalleryPhotoDetailsProps } from "../../types";
 import { Layout } from "../../components";
-import { StyledContent, StyledSingleContent } from "../../styles/SharedStyles";
+import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
   const { items } = await client.getEntries({ content_type: "gallery" });
-  console.log("items", items);
   const ids = items.map((item: any) => {
     return {
       params: { slug: item.fields.slug },
@@ -37,31 +36,33 @@ const StyledImage = styled.img`
   width: 100%;
 `;
 
-export default function Photo({
+export default function GalleryPhotoDetails({
   photo: {
     fields: {
       title,
-      featuredImage: { fields },
+      featuredImage: {
+        fields: {
+          file: { url },
+        },
+      },
       shortDescription,
       linkToInstagram,
     },
   },
-}) {
+}: GalleryPhotoDetailsProps) {
   return (
     <Layout>
       <StyledSingleContent gallery={true}>
         <div>
-        <StyledImage src={fields.file.url} />
-        <h2>{title}</h2>
-        <p>{shortDescription}</p>
-        <a>{linkToInstagram}</a>
+          <StyledImage src={url} />
+          <h2>{title}</h2>
+          <p>{shortDescription}</p>
+          <a>{linkToInstagram}</a>
         </div>
         <div>
-            <Link href="/gallery" passHref>
-                <a>
-                    Back to photos
-                </a>
-            </Link>
+          <Link href="/gallery" passHref>
+            <a>Back to photos</a>
+          </Link>
         </div>
       </StyledSingleContent>
     </Layout>

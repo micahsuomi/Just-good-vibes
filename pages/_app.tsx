@@ -1,6 +1,6 @@
 import React from "react";
 import Head from 'next/head';
-
+import { GlobalStyles } from "../styles/GlobalStyles";
 import "../styles/globals.css";
 
 type AppProps = {
@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         />
       </Head>
+      <GlobalStyles />
       <Component {...pageProps} />
     </>
 

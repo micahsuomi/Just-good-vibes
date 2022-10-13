@@ -50,7 +50,7 @@ const StyledEventAddressWrapper = styled.div`
 
 const StyledEventAddress = styled.p`
   font-weight: 700;
-  color: #aa2a88;
+  color: var(--color-red-purple);
 `;
 
 const StyledEventGoogleMapLink = styled.a``;

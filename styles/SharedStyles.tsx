@@ -33,10 +33,18 @@ export const StyledSingleContent = styled.div`
           box-sizing: border-box;
         `
       : css`
-          max-width: 1000px;
           margin: 20px auto 80px;
-          padding: 50px 150px;
           width: 100%;
           box-sizing: border-box;
+          padding: 10px 20px;
+
+          @media screen and (min-width: 768px) {
+            padding: 50px 100px;
+          }
+
+          @media screen and (min-width: 1024px) {
+            max-width: 1000px;
+            padding: 50px 150px;
+          }
         `}
 `;

@@ -32,9 +32,13 @@ export type Reviews = {
   reviews: [Review];
 };
 
-export interface ReviewItemProps {
+export type ReviewItemProps = {
   review: Review;
 }
+
+export type ReviewDetailsProps = {
+  review: Review;
+};
 
 export type Post = {
   fields: {
@@ -70,7 +74,11 @@ export type Posts = {
   posts: [Post];
 };
 
-export interface BlogItemProps {
+export interface PostItemProps {
+  post: Post;
+}
+
+export type PostDetailsProps = {
   post: Post;
 }
 
@@ -93,6 +101,10 @@ export type GalleryPhoto = {
 
 export type GalleryPhotos = {
   gallery: [GalleryPhoto];
+};
+
+export type GalleryPhotoDetailsProps = {
+  photo: GalleryPhoto;
 };
 
 export type Event = {
@@ -136,7 +148,11 @@ export type Events = {
 
 export type EventItemProps = {
   event: Event;
-}
+};
+
+export type EventDetailsProps = {
+  event: Event;
+};
 export type LayoutProps = {
   children: any;
-}
+};

@@ -4,16 +4,14 @@ import styled from "styled-components";
 import moment from "moment";
 import { MdLocationOn } from "react-icons/md";
 
-import { Events, Event } from "../../types";
+import { EventDetailsProps } from "../../types";
 import { Layout } from "../../components";
 import { ContentBody } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
   const { items } = await client.getEntries({ content_type: "event" });
-  console.log("items", items);
   const ids = items.map((item: any) => {
-    console.log("item", item);
     return {
       params: {
         slug: item.fields.slug,
@@ -39,13 +37,12 @@ export async function getStaticProps({ params: { slug } }) {
   };
 }
 
-const StyledEventWrapper = styled.div`
+const StyledWrapper = styled.div`
   background-color: #fff;
 `;
 
 const StyledImageContainer = styled.div`
   @media screen and (min-width: 820px) {
-    padding: 1rem 2rem;
     max-width: 800px;
   }
   @media screen and (min-width: 1024px) {
@@ -60,7 +57,7 @@ const StyledFeaturedImage = styled.img`
 const StyledBody = styled.div``;
 
 const StyledTitle = styled.h3`
-  color: #1f1e1e;
+  color: var(--color-text-primary);
 `;
 
 const StyledDate = styled.p``;
@@ -80,31 +77,33 @@ const StyledAddressWrapper = styled.div`
 
 const StyledAddress = styled.p`
   font-weight: 700;
-  color: #aa2a88;
+  color: var(--color-red-purple);
 `;
 
 const StyledEventGoogleMapLink = styled.a``;
 
 const StyledIntro = styled.p`
-  color: #707070;
+  color: var(--color-text-light);
   font-weight: 700;
   font-style: italic;
 `;
 
-export default function EventDetails({ event }) {
+export default function EventDetails({ event }: EventDetailsProps) {
   const {
-    title,
-    featuredImage: { fields },
-    eventDate,
-    address,
-    location: { lat, lon },
-    intro,
-    eventDescription,
-  } = event.fields;
+    fields: {
+      title,
+      featuredImage: { fields },
+      eventDate,
+      address,
+      location: { lat, lon },
+      intro,
+      eventDescription,
+    },
+  } = event;
   return (
     <Layout>
       <StyledSingleContent>
-        <StyledEventWrapper>
+        <StyledWrapper>
           <StyledImageContainer>
             <StyledFeaturedImage src={fields.file.url} alt={fields.title} />
           </StyledImageContainer>
@@ -126,12 +125,10 @@ export default function EventDetails({ event }) {
                 </StyledEventGoogleMapLink>
               </Link>
             </StyledAddressWrapper>
-            <StyledIntro>
-                {intro}
-            </StyledIntro>
+            <StyledIntro>{intro}</StyledIntro>
             <ContentBody bodyText={eventDescription} />
           </StyledBody>
-        </StyledEventWrapper>
+        </StyledWrapper>
       </StyledSingleContent>
     </Layout>
   );

@@ -35,7 +35,7 @@ const StyledDate = styled.p`
   color: #1f1e1e;
 `;
 const StyledTitle = styled.h4`
-  color: #1f1e1e;
+  color: var(--color-text-primary);
 `;
 
 const StyledRating = styled.p`
@@ -43,7 +43,7 @@ const StyledRating = styled.p`
 `;
 
 const StyledCardIntro = styled.p`
-  color: #7f7979;
+  color: var(--color-text-light);
   line-height: 1.6;
 `;
 
@@ -56,7 +56,7 @@ export const ReviewItem = ({ review }: ReviewItemProps) => {
     excerpt,
   } = review.fields;
   return (
-    <Link href={`/review/${slug}`} passHref>
+    <Link href={`/reviews/${slug}`} passHref>
       <StyledLink>
         <StyledCard key={review.sys.id}>
           <StyledCardImageWrapper>

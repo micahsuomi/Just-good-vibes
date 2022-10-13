@@ -1,11 +1,11 @@
 import { client } from "../../helpers/createClient";
 import styled from "styled-components";
 
-import {Layout, ContentBody} from "../../components";
+import { Layout, ContentBody } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
-  const { items } = await client.getEntries({ content_type: "post"});
+  const { items } = await client.getEntries({ content_type: "post" });
   const ids = items.map((item: any) => {
     return {
       params: { slug: item.fields.slug },
@@ -35,27 +35,26 @@ const StyledPostWrapper = styled.div`
 `;
 
 const StyledImageContainer = styled.div`
-@media screen and (min-width: 820px) {
-  padding: 1rem 2rem;
-  max-width: 800px;
-}
-@media screen and (min-width: 1024px) {
-  padding: 1rem 5rem 3rem 0;;
-  max-width: 750px;
-}
-  
+  @media screen and (min-width: 820px) {
+    padding: 1rem 2rem;
+    max-width: 800px;
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 1rem 5rem 3rem 0;
+    max-width: 750px;
+  }
 `;
 const StyledFeaturedImage = styled.img`
   width: 100%;
 `;
 
 const StyledTitle = styled.h3`
-  color: #1f1e1e;
+  color: var(--color-text-primary);
 `;
 
 const StyledReadingTime = styled.span`
   font-size: 16px;
-  color: #707070;
+  color: var(--color-text-light);
   font-weight: 700;
   margin-bottom: 1.7rem;
   ::after {
@@ -69,25 +68,36 @@ const StyledReadingTime = styled.span`
 `;
 
 const StyledIntro = styled.p`
-  color: #707070;
+  color: var(--color-text-light);
   font-weight: 700;
   font-style: italic;
 `;
 
-export default function RecipeDetails({ post }) {
-  console.log("from RecipeDetails", post);
+export default function BlogDetails({ post }) {
+  console.log("from post details", post);
   const {
-    fields: { title, intro, description, readingTime },
+    fields: {
+      title,
+      featuredImage: {
+        fields: {
+          file: { url },
+        },
+      },
+      intro,
+      description,
+      readingTime,
+    },
+    sys: { createdAt },
   } = post;
   return (
     <Layout>
       <StyledSingleContent>
         <StyledPostWrapper>
           <StyledImageContainer>
-          <StyledFeaturedImage
-            src={post.fields.thumbnail.fields.file.url}
-            alt={post.fields.title}
-          />
+            <StyledFeaturedImage
+              src={post.fields.thumbnail.fields.file.url}
+              alt={post.fields.title}
+            />
           </StyledImageContainer>
           <StyledTitle>{title}</StyledTitle>
           <StyledIntro>{intro}</StyledIntro>
