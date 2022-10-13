@@ -97,6 +97,9 @@ export type GalleryPhoto = {
     shortDescription: string;
     linkToInstagram: string;
   };
+  sys: {
+    id: string;
+  }
 };
 
 export type GalleryPhotos = {
@@ -156,3 +159,27 @@ export type EventDetailsProps = {
 export type LayoutProps = {
   children: any;
 };
+
+export type ContentBodyProps = {
+  bodyText: Document;
+}
+
+export type About = {
+  map: any;
+  fields: {
+    title: string;
+    slug: string;
+    featuredImage: {
+      fields: {
+        file: {
+          url: string;
+        };
+        title: string;
+      };
+    };
+    description: string;
+  }
+}
+export type AboutPageProps = {
+  about: About;
+}

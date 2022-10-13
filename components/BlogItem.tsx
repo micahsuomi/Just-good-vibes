@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import moment from "moment";
@@ -59,34 +60,34 @@ const StyledReadingTime = styled.p`
   font-size: 14px;
 `;
 export const BlogItem = ({ post }: PostItemProps) => {
-  const {
-    title,
-    slug,
-    thumbnail: { fields },
-    intro,
-    readingTime,
-  } = post.fields;
-  return (
-    <Link href={`/blog/${slug}`} passHref>
-      <StyledLink>
-        <StyledCard key={post.sys.id}>
-          <div>
-            <StyledImage src={fields.file.url} alt={fields.title} />
-          </div>
-          <div>
-            <StyledBody>
-              <StyledCreatedAt>
-                {moment(post.sys.createdAt).format("MMM Do YYYY")}
-              </StyledCreatedAt>
-              <StyledTitle>{title}</StyledTitle>
+	const {
+		title,
+		slug,
+		thumbnail: { fields },
+		intro,
+		readingTime,
+	} = post.fields;
+	return (
+		<Link href={`/blog/${slug}`} passHref>
+			<StyledLink>
+				<StyledCard key={post.sys.id}>
+					<div>
+						<StyledImage src={fields.file.url} alt={fields.title} />
+					</div>
+					<div>
+						<StyledBody>
+							<StyledCreatedAt>
+								{moment(post.sys.createdAt).format("MMM Do YYYY")}
+							</StyledCreatedAt>
+							<StyledTitle>{title}</StyledTitle>
 
-              <StyledIntro>{intro}</StyledIntro>
+							<StyledIntro>{intro}</StyledIntro>
 
-              <StyledReadingTime>Reading time: {readingTime}</StyledReadingTime>
-            </StyledBody>
-          </div>
-        </StyledCard>
-      </StyledLink>
-    </Link>
-  );
+							<StyledReadingTime>Reading time: {readingTime}</StyledReadingTime>
+						</StyledBody>
+					</div>
+				</StyledCard>
+			</StyledLink>
+		</Link>
+	);
 };

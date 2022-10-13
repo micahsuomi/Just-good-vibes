@@ -1,18 +1,18 @@
+import React, { useState } from "react";
 import { client } from "../helpers/createClient";
 import Link from "next/link";
 import styled from "styled-components";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import {Layout} from "../components";
+import { Layout, EventItem, ReviewItem, BlogItem } from "../components";
 import { StyledContent } from "../styles/SharedStyles";
 
 export async function getStaticProps() {
-  const { items } = await client.getEntries({ content_type: "landingPage" });
-  console.log("res", items);
-  return {
-    props: {
-      landingItems: items,
-    },
-  };
+	const { items } = await client.getEntries({ content_type: "landingPage" });
+	return {
+		props: {
+			homeItems: items,
+		},
+	};
 }
 
 const StyledHeroContainer = styled.div`
@@ -70,42 +70,70 @@ const StyledImage = styled.img`
   height: 100%;
 `;
 
-export default function HomePage({ landingItems }) {
-  console.log(landingItems);
-  return (
-    <Layout>
-      <>
-        <StyledHeroContainer className="hero">
-          <StyledHeroBody>
-            <StyledHeroHeader>Good Vibes</StyledHeroHeader>
-            <StyledHeroSubHeader>
+export default function HomePage({ homeItems }: any) {
+	console.log("landi page items", homeItems);
+	const [latestReviews, setLatestReviews] = useState([]);
+
+	return (
+		<Layout>
+			<>
+				<StyledHeroContainer className="hero">
+					<StyledHeroBody>
+						<StyledHeroHeader>Good Vibes</StyledHeroHeader>
+						<StyledHeroSubHeader>
               Where the good feelings happen
-            </StyledHeroSubHeader>
-            <StyledHeroButton>
-              <Link href="/recipes" passHref>
-                <a>Read More</a>
-              </Link>
-            </StyledHeroButton>
-          </StyledHeroBody>
-        </StyledHeroContainer>
-        <StyledContent>
-          {landingItems.map((item) => {
-            const { title, featuredImage, description } = item.fields;
-            console.log(featuredImage);
-            return (
-              <div>
-                <h3>{title}</h3>
-                <StyledGrid>
-                  {featuredImage.map((image) => {
-                    return <StyledImage src={image.fields.file.url} />;
-                  })}
-                </StyledGrid>
-                <p>{documentToReactComponents(description)}</p>
-              </div>
-            );
-          })}
-        </StyledContent>
-      </>
-    </Layout>
-  );
+						</StyledHeroSubHeader>
+						<StyledHeroButton>
+							<Link href="/recipes" passHref>
+								<a>Read More</a>
+							</Link>
+						</StyledHeroButton>
+					</StyledHeroBody>
+				</StyledHeroContainer>
+				<StyledContent>
+					{homeItems.map((item: any) => {
+						const { title, featuredImage, description } = item.fields;
+						return (
+							<>
+								<div key={item.title}>
+									<h3>{title}</h3>
+									<StyledGrid>
+										{featuredImage.map((image) => {
+											return (
+												<StyledImage
+													src={image.fields.file.url}
+													key={image.title}
+												/>
+											);
+										})}
+									</StyledGrid>
+									<p>{documentToReactComponents(description)}</p>
+								</div>
+								<div>
+                  Latest posts
+									{item.fields.latestPosts.map((item: any) => {
+										console.log();
+										switch (item.sys.contentType.sys.id) {
+										case "reviews":
+											return <ReviewItem review={item} />;
+											break;
+										case "event":
+											return <EventItem event={item} />;
+											break;
+
+										case "post":
+											return <BlogItem post={item} />;
+											break;
+
+										default:
+										}
+									})}
+								</div>
+							</>
+						);
+					})}
+				</StyledContent>
+			</>
+		</Layout>
+	);
 }

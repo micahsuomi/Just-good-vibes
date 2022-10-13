@@ -1,3 +1,4 @@
+import React from "react";
 import { client } from "../../helpers/createClient";
 import styled from "styled-components";
 import moment from "moment";
@@ -7,29 +8,29 @@ import { Layout, ContentBody } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
-  const { items } = await client.getEntries({ content_type: "reviews" });
-  const ids = items.map((item: any) => {
-    return {
-      params: { slug: item.fields.slug },
-    };
-  });
-  return {
-    paths: ids,
-    fallback: true,
-  };
+	const { items } = await client.getEntries({ content_type: "reviews" });
+	const ids = items.map((item: any) => {
+		return {
+			params: { slug: item.fields.slug },
+		};
+	});
+	return {
+		paths: ids,
+		fallback: true,
+	};
 }
 
 export async function getStaticProps({ params }) {
-  const { slug } = params;
-  const { items } = await client.getEntries({
-    content_type: "reviews",
-    "fields.slug": slug,
-  });
-  return {
-    props: {
-      review: items[0],
-    },
-  };
+	const { slug } = params;
+	const { items } = await client.getEntries({
+		content_type: "reviews",
+		"fields.slug": slug,
+	});
+	return {
+		props: {
+			review: items[0],
+		},
+	};
 }
 
 const StyledWrapper = styled.div`
@@ -74,50 +75,50 @@ const StyledIntro = styled.p`
 `;
 
 export default function ReviewDetails({ review }: ReviewDetailsProps) {
-  console.log(review);
-  const {
-    fields: {
-        title,
-        slug,
-        featuredImage: {
-          fields: {
-            file: { url },
-          },
-        },
-        excerpt,
-        rating,
-        description,
-      },
-      sys: {
-        createdAt
-      }
-    }
+	console.log(review);
+	const {
+		fields: {
+			title,
+			slug,
+			featuredImage: {
+				fields: {
+					file: { url },
+				},
+			},
+			excerpt,
+			rating,
+			description,
+		},
+		sys: {
+			createdAt
+		}
+	}
     = review;
-  return (
-    <Layout>
-      <StyledSingleContent>
-        <StyledWrapper>
-          <StyledImageContainer>
-            <StyledFeaturedImage src={url} />
-          </StyledImageContainer>
-          <StyledBody>
-            <StyledTitle>{title}</StyledTitle>
-          </StyledBody>
-          <StyledDateRating>
-          <StyledDate>
-          {moment(createdAt).format("MMMM Do YYYY, h:mm")}
-          </StyledDate>
-          <StyledRating>
+	return (
+		<Layout>
+			<StyledSingleContent>
+				<StyledWrapper>
+					<StyledImageContainer>
+						<StyledFeaturedImage src={url} />
+					</StyledImageContainer>
+					<StyledBody>
+						<StyledTitle>{title}</StyledTitle>
+					</StyledBody>
+					<StyledDateRating>
+						<StyledDate>
+							{moment(createdAt).format("MMMM Do YYYY, h:mm")}
+						</StyledDate>
+						<StyledRating>
             Rating: {rating}
-          </StyledRating>
-          </StyledDateRating>
+						</StyledRating>
+					</StyledDateRating>
          
-          <StyledIntro>
-            {excerpt}
-          </StyledIntro>
-          <ContentBody bodyText={description} />
-        </StyledWrapper>
-      </StyledSingleContent>
-    </Layout>
-  );
+					<StyledIntro>
+						{excerpt}
+					</StyledIntro>
+					<ContentBody bodyText={description} />
+				</StyledWrapper>
+			</StyledSingleContent>
+		</Layout>
+	);
 }
