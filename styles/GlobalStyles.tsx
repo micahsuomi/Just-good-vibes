@@ -7,4 +7,4 @@ export const GlobalStyles = createGlobalStyle `
         --color-text-darkgrey: #514949;
         --color-red-purple: #aa2a88;
     }
-`
+`;

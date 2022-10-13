@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
@@ -8,12 +9,12 @@ import { Layout } from "../../components";
 import { StyledContent } from "../../styles/SharedStyles";
 
 export async function getStaticProps() {
-  const { items } = await client.getEntries({ content_type: "gallery" });
-  return {
-    props: {
-      gallery: items,
-    },
-  };
+	const { items } = await client.getEntries({ content_type: "gallery" });
+	return {
+		props: {
+			gallery: items,
+		},
+	};
 }
 
 const StyledCard = styled.div`
@@ -57,44 +58,44 @@ const StyledCardTitle = styled.h5`
 `;
 
 export default function GalleryPage({ gallery }: GalleryPhotos) {
-  console.log(gallery);
-  return (
-    <Layout>
-      <StyledContent>
-        <h3>Gallery</h3>
-        <ResponsiveMasonry
-          //   columsCount={2}
-          columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-          gutter="1.5rem"
-        >
-          <Masonry>
-            {gallery.map((item) => {
-              const {
-                title,
-                slug,
-                featuredImage: { fields },
-              } = item.fields;
-              return (
-                <Link href={`/gallery/${slug}`} passHref>
-                  <a>
-                    <StyledCard>
-                      <StyledCardImageWrapper>
-                        <StyledCardImage
-                          src={fields.file.url}
-                          alt={fields.title}
-                        />
-                      </StyledCardImageWrapper>
-                      <StyledCardOverlayBackground>
-                        <StyledCardTitle>{title}</StyledCardTitle>
-                      </StyledCardOverlayBackground>
-                    </StyledCard>
-                  </a>
-                </Link>
-              );
-            })}
-          </Masonry>
-        </ResponsiveMasonry>
-      </StyledContent>
-    </Layout>
-  );
+	console.log(gallery);
+	return (
+		<Layout>
+			<StyledContent>
+				<h3>Gallery</h3>
+				<ResponsiveMasonry
+					//   columsCount={2}
+					columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+					gutter="1.5rem"
+				>
+					<Masonry>
+						{gallery.map((item: any) => {
+							const {
+								title,
+								slug,
+								featuredImage: { fields },
+							} = item.fields;
+							return (
+								<Link href={`/gallery/${slug}`} passHref key={item.sys.id}>
+									<a>
+										<StyledCard>
+											<StyledCardImageWrapper>
+												<StyledCardImage
+													src={fields.file.url}
+													alt={fields.title}
+												/>
+											</StyledCardImageWrapper>
+											<StyledCardOverlayBackground>
+												<StyledCardTitle>{title}</StyledCardTitle>
+											</StyledCardOverlayBackground>
+										</StyledCard>
+									</a>
+								</Link>
+							);
+						})}
+					</Masonry>
+				</ResponsiveMasonry>
+			</StyledContent>
+		</Layout>
+	);
 }

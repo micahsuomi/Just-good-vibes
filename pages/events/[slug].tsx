@@ -1,3 +1,4 @@
+import React from "react";
 import { client } from "../../helpers/createClient";
 import Link from "next/link";
 import styled from "styled-components";
@@ -10,31 +11,31 @@ import { ContentBody } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
-  const { items } = await client.getEntries({ content_type: "event" });
-  const ids = items.map((item: any) => {
-    return {
-      params: {
-        slug: item.fields.slug,
-      },
-    };
-  });
-  return {
-    paths: ids,
-    fallback: true,
-  };
+	const { items } = await client.getEntries({ content_type: "event" });
+	const ids = items.map((item: any) => {
+		return {
+			params: {
+				slug: item.fields.slug,
+			},
+		};
+	});
+	return {
+		paths: ids,
+		fallback: true,
+	};
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const { items } = await client.getEntries({
-    content_type: "event",
-    "fields.slug": slug,
-  });
+	const { items } = await client.getEntries({
+		content_type: "event",
+		"fields.slug": slug,
+	});
 
-  return {
-    props: {
-      event: items[0],
-    },
-  };
+	return {
+		props: {
+			event: items[0],
+		},
+	};
 }
 
 const StyledWrapper = styled.div`
@@ -89,47 +90,47 @@ const StyledIntro = styled.p`
 `;
 
 export default function EventDetails({ event }: EventDetailsProps) {
-  const {
-    fields: {
-      title,
-      featuredImage: { fields },
-      eventDate,
-      address,
-      location: { lat, lon },
-      intro,
-      eventDescription,
-    },
-  } = event;
-  return (
-    <Layout>
-      <StyledSingleContent>
-        <StyledWrapper>
-          <StyledImageContainer>
-            <StyledFeaturedImage src={fields.file.url} alt={fields.title} />
-          </StyledImageContainer>
-          <StyledBody>
-            <StyledTitle>{title}</StyledTitle>
-            <StyledDate>
+	const {
+		fields: {
+			title,
+			featuredImage: { fields },
+			eventDate,
+			address,
+			location: { lat, lon },
+			intro,
+			eventDescription,
+		},
+	} = event;
+	return (
+		<Layout>
+			<StyledSingleContent>
+				<StyledWrapper>
+					<StyledImageContainer>
+						<StyledFeaturedImage src={fields.file.url} alt={fields.title} />
+					</StyledImageContainer>
+					<StyledBody>
+						<StyledTitle>{title}</StyledTitle>
+						<StyledDate>
               Date: {moment(eventDate).format("MMMM Do YYYY, h:mm")}
-            </StyledDate>
-            <StyledAddressWrapper>
-              <Link href={`https://maps.google.com/?q=${lat},${lon}`} passHref>
-                <StyledEventGoogleMapLink
-                  target="blank"
-                  title="view on google maps"
-                >
-                  <>
-                    <StyledAddress>{address}</StyledAddress>
-                    <MdLocationOn color="#d83535" />
-                  </>
-                </StyledEventGoogleMapLink>
-              </Link>
-            </StyledAddressWrapper>
-            <StyledIntro>{intro}</StyledIntro>
-            <ContentBody bodyText={eventDescription} />
-          </StyledBody>
-        </StyledWrapper>
-      </StyledSingleContent>
-    </Layout>
-  );
+						</StyledDate>
+						<StyledAddressWrapper>
+							<Link href={`https://maps.google.com/?q=${lat},${lon}`} passHref>
+								<StyledEventGoogleMapLink
+									target="blank"
+									title="view on google maps"
+								>
+									<>
+										<StyledAddress>{address}</StyledAddress>
+										<MdLocationOn color="#d83535" />
+									</>
+								</StyledEventGoogleMapLink>
+							</Link>
+						</StyledAddressWrapper>
+						<StyledIntro>{intro}</StyledIntro>
+						<ContentBody bodyText={eventDescription} />
+					</StyledBody>
+				</StyledWrapper>
+			</StyledSingleContent>
+		</Layout>
+	);
 }

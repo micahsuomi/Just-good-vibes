@@ -24,15 +24,15 @@ export const StyledVerticalGrid = styled.div`
 
 export const StyledSingleContent = styled.div`
   ${({ gallery }) =>
-    gallery
-      ? css`
+		gallery
+			? css`
           max-width: 1000px;
           margin: 20px auto 80px;
           padding: 50px 150px;
           width: 100%;
           box-sizing: border-box;
         `
-      : css`
+			: css`
           margin: 20px auto 80px;
           width: 100%;
           box-sizing: border-box;

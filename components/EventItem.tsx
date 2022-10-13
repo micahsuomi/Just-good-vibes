@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import moment from "moment";
@@ -61,45 +62,45 @@ const StyledCardIntro = styled.p`
 `;
 
 export const EventItem = ({ event }: EventItemProps) => {
-  const {
-    title,
-    slug,
-    thumbnail: { fields },
-    eventDate,
-    address,
-    location: { lat, lon },
-    intro,
-  } = event.fields;
-  return (
-    <StyledEventCard key={event.sys.id}>
-      <StyledEventCardImageWrapper>
-        <StyledEventCardImage src={fields.file.url} alt={fields.title} />
-      </StyledEventCardImageWrapper>
-      <StyledEventCardBody>
-        <Link href={`/events/${slug}`} passHref>
-          <a>
-            {" "}
-            <StyledEventTitle>{title}</StyledEventTitle>
-          </a>
-        </Link>
-        <StyledEventDate>
-          {moment(eventDate).format("MMMM Do YYYY, h:mm")}
-        </StyledEventDate>
-        <StyledEventAddressWrapper>
-          <Link href={`https://maps.google.com/?q=${lat},${lon}`} passHref>
-            <StyledEventGoogleMapLink
-              target="blank"
-              title="view on google maps"
-            >
-              <>
-                <StyledEventAddress>{address}</StyledEventAddress>
-                <MdLocationOn color="#d83535" />
-              </>
-            </StyledEventGoogleMapLink>
-          </Link>
-        </StyledEventAddressWrapper>
-        <StyledCardIntro>{intro}</StyledCardIntro>
-      </StyledEventCardBody>
-    </StyledEventCard>
-  );
+	const {
+		title,
+		slug,
+		thumbnail: { fields },
+		eventDate,
+		address,
+		location: { lat, lon },
+		intro,
+	} = event.fields;
+	return (
+		<StyledEventCard key={event.sys.id}>
+			<StyledEventCardImageWrapper>
+				<StyledEventCardImage src={fields.file.url} alt={fields.title} />
+			</StyledEventCardImageWrapper>
+			<StyledEventCardBody>
+				<Link href={`/events/${slug}`} passHref>
+					<a>
+						{" "}
+						<StyledEventTitle>{title}</StyledEventTitle>
+					</a>
+				</Link>
+				<StyledEventDate>
+					{moment(eventDate).format("MMMM Do YYYY, h:mm")}
+				</StyledEventDate>
+				<StyledEventAddressWrapper>
+					<Link href={`https://maps.google.com/?q=${lat},${lon}`} passHref>
+						<StyledEventGoogleMapLink
+							target="blank"
+							title="view on google maps"
+						>
+							<>
+								<StyledEventAddress>{address}</StyledEventAddress>
+								<MdLocationOn color="#d83535" />
+							</>
+						</StyledEventGoogleMapLink>
+					</Link>
+				</StyledEventAddressWrapper>
+				<StyledCardIntro>{intro}</StyledCardIntro>
+			</StyledEventCardBody>
+		</StyledEventCard>
+	);
 };
