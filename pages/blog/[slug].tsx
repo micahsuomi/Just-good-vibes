@@ -6,7 +6,6 @@ import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
   const { items } = await client.getEntries({ content_type: "post"});
-  console.log("res", items);
   const ids = items.map((item: any) => {
     return {
       params: { slug: item.fields.slug },
@@ -50,6 +49,10 @@ const StyledFeaturedImage = styled.img`
   width: 100%;
 `;
 
+const StyledTitle = styled.h3`
+  color: #1f1e1e;
+`;
+
 const StyledReadingTime = styled.span`
   font-size: 16px;
   color: #707070;
@@ -86,7 +89,7 @@ export default function RecipeDetails({ post }) {
             alt={post.fields.title}
           />
           </StyledImageContainer>
-          <h3>{title}</h3>
+          <StyledTitle>{title}</StyledTitle>
           <StyledIntro>{intro}</StyledIntro>
           <StyledReadingTime>Reading time: {readingTime}</StyledReadingTime>
           <ContentBody bodyText={description} />
