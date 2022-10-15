@@ -74,22 +74,43 @@ export default function HomePage({ homeItems }: any) {
 	console.log("landi page items", homeItems);
 	const [latestReviews, setLatestReviews] = useState([]);
 	const [latestBlogPosts, setLatestBlogPosts] = useState([]);
+	const arrReviews = [];
 
-
-	const filterReviewItems = homeItems.filter((item) => item.fields.latestPosts.filter((post) => {
-		console.log(post.sys.contentType.sys.id);
-		switch(post.sys.contentType.sys.id) {
-		case "reviews":
-			console.log("reviews here", post);
-			break;
-		default:
-
-		}
-		// post.sys.contentType.sys.id === "reviews"
-	}));
-	console.log(filterReviewItems);
+	const displayLatestsPostsData = () => {
+		homeItems.filter((item) => {
+			item.fields.latestPosts.filter((post) => {
+				// switch(post.sys.contentType.sys.id) {
+				// case "reviews":
+				// 	arrReviews.push(post);
+				// 	setLatestReviews(arrReviews);
+				// 	break;
+				// default:
+				// if(post.sys.contentType.sys.id === "reviews") {
+				//  	arrReviews.push(post);
+				//  }
+				// console.log(arrReviews)
+	
+				// console.log(post.sys.contentType.sys.id);
+				// switch(post.sys.contentType.sys.id) {
+				// case "reviews":
+				// 	console.log("reviews here", post);
+				// 	break;
+				// default:
+	
+			
+			// post.sys.contentType.sys.id === "reviews"
+				// }
+			});
+		});
+	};
+	
+	console.log("filterReviewItems", displayLatestsPostsData());
+	console.log(latestReviews);
 	useEffect(() => {
-	//  displayLatestsPostsData();
+		displayLatestsPostsData();
+		if(arrReviews.length > 0) {
+			console.log(arrReviews);
+		}
 	}, []);
 	
 	return (
@@ -127,7 +148,7 @@ export default function HomePage({ homeItems }: any) {
 									</StyledGrid>
 									<p>{documentToReactComponents(description)}</p>
 								</div>
-								<div>
+								{/* <div>
                   Latest posts
 									{item.fields.latestPosts.map((item: any) => {
 										console.log();
@@ -143,6 +164,9 @@ export default function HomePage({ homeItems }: any) {
 										default:
 										}
 									})}
+								</div> */}
+								<div>
+									{/* {filterReviewItems} */}
 								</div>
 							</>
 						);
