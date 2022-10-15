@@ -53,14 +53,7 @@ export type Post = {
       };
     };
     intro: string;
-    featuredImage: {
-      fields: {
-        file: {
-          url: string;
-        };
-        title: string;
-      };
-    };
+    featuredImage: FeaturedImage;
     description: string;
     readingTime: string;
   };
@@ -86,14 +79,7 @@ export type GalleryPhoto = {
   fields: {
     title: string;
     slug: string;
-    featuredImage: {
-      fields: {
-        file: {
-          url: string;
-        };
-        title: string;
-      };
-    };
+    featuredImage: FeaturedImage;
     shortDescription: string;
     linkToInstagram: string;
   };
@@ -129,14 +115,7 @@ export type Event = {
       lat: string;
       lon: string;
     };
-    featuredImage: {
-      fields: {
-        file: {
-          url: string;
-        };
-        title: string;
-      };
-    };
+    featuredImage: FeaturedImage;
     intro: string;
     description: string;
   };
@@ -169,17 +148,37 @@ export type About = {
   fields: {
     title: string;
     slug: string;
-    featuredImage: {
-      fields: {
-        file: {
-          url: string;
-        };
-        title: string;
-      };
-    };
+    featuredImage: FeaturedImage
     description: string;
   }
 }
+
 export type AboutPageProps = {
   about: About;
+}
+
+export type ThumbnailImage = {
+  fields: {
+    file: {
+      url: string;
+    };
+    title: string;
+  };
+}
+
+export type FeaturedImage = {
+  fields: {
+    file: {
+      url: string;
+    };
+    title: string;
+  };
+};
+
+export type HomeItemsProps = {
+  fields: {
+    title: string;
+    slug: string;
+    description: string;
+  }
 }
