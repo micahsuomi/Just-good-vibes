@@ -7,29 +7,29 @@ import { Layout, ContentBody } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
-	const { items } = await client.getEntries({ content_type: "post" });
-	const ids = items.map((item: any) => {
-		return {
-			params: { slug: item.fields.slug },
-		};
-	});
+  const { items } = await client.getEntries({ content_type: "post" });
+  const ids = items.map((item: any) => {
+    return {
+      params: { slug: item.fields.slug },
+    };
+  });
 
-	return {
-		paths: ids,
-		fallback: false,
-	};
+  return {
+    paths: ids,
+    fallback: false,
+  };
 }
 
 export async function getStaticProps({ params }) {
-	const { items } = await client.getEntries({
-		content_type: "post",
-		"fields.slug": params.slug,
-	});
-	return {
-		props: {
-			post: items[0],
-		},
-	};
+  const { items } = await client.getEntries({
+    content_type: "post",
+    "fields.slug": params.slug,
+  });
+  return {
+    props: {
+      post: items[0],
+    },
+  };
 }
 
 const StyledPostWrapper = styled.div`
@@ -76,37 +76,37 @@ const StyledIntro = styled.p`
 `;
 
 export default function BlogDetails({ post }: PostDetailsProps) {
-	console.log("from post details", post);
-	const {
-		fields: {
-			title,
-			featuredImage: {
-				fields: {
-					file: { url },
-				},
-			},
-			intro,
-			description,
-			readingTime,
-		},
-		sys: { createdAt },
-	} = post;
-	return (
-		<Layout>
-			<StyledSingleContent>
-				<StyledPostWrapper>
-					<StyledImageContainer>
-						<StyledFeaturedImage
-							src={post.fields.thumbnail.fields.file.url}
-							alt={post.fields.title}
-						/>
-					</StyledImageContainer>
-					<StyledTitle>{title}</StyledTitle>
-					<StyledIntro>{intro}</StyledIntro>
-					<StyledReadingTime>Reading time: {readingTime}</StyledReadingTime>
-					<ContentBody bodyText={description} />
-				</StyledPostWrapper>
-			</StyledSingleContent>
-		</Layout>
-	);
+  console.log("from post details", post);
+  const {
+    fields: {
+      title,
+      featuredImage: {
+        fields: {
+          file: { url },
+        },
+      },
+      intro,
+      description,
+      readingTime,
+    },
+    sys: { createdAt },
+  } = post;
+  return (
+    <Layout>
+      <StyledSingleContent>
+        <StyledPostWrapper>
+          <StyledImageContainer>
+            <StyledFeaturedImage
+              src={post.fields.thumbnail.fields.file.url}
+              alt={post.fields.title}
+            />
+          </StyledImageContainer>
+          <StyledTitle>{title}</StyledTitle>
+          <StyledIntro>{intro}</StyledIntro>
+          <StyledReadingTime>Reading time: {readingTime}</StyledReadingTime>
+          <ContentBody bodyText={description} />
+        </StyledPostWrapper>
+      </StyledSingleContent>
+    </Layout>
+  );
 }
