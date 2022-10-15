@@ -1,3 +1,5 @@
+import { JsxAttribute } from "typescript";
+
 export type Review = {
   fields: {
     title: string;
@@ -167,6 +169,7 @@ export type ThumbnailImage = {
 }
 
 export type FeaturedImage = {
+  map: Function;
   fields: {
     file: {
       url: string;
@@ -175,10 +178,26 @@ export type FeaturedImage = {
   };
 };
 
-export type HomeItemsProps = {
+export type MixedContentTypes = {
+  sys: any;
+  filter: any;
+  post: [Review] | [Post] | [Event] | [GalleryPhoto]
+} 
+
+export type Home = {
+  [x: string]: any;
   fields: {
     title: string;
     slug: string;
     description: string;
+    featuredImage: FeaturedImage;
+    latestPosts: MixedContentTypes;
+  };
+  sys: {
+    id: string;
   }
+}
+
+export type HomeItemsProps = {
+  homeItems: Home;
 }

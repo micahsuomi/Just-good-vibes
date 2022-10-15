@@ -6,12 +6,12 @@ import { Layout } from "../../components";
 import { StyledContent } from "../../styles/SharedStyles";
 import { BlogItem } from "../../components";
 export async function getStaticProps() {
-	const res = await client.getEntries({ content_type: "post" });
-	return {
-		props: {
-			posts: res.items,
-		},
-	};
+  const res = await client.getEntries({ content_type: "post" });
+  return {
+    props: {
+      posts: res.items,
+    },
+  };
 }
 
 import React from "react";
@@ -25,17 +25,16 @@ const StyledVerticalGrid = styled.div`
 `;
 
 export default function BlogPage({ posts }: Posts) {
-	console.log(posts);
-	return (
-		<Layout>
-			<StyledContent>
-				<StyledSectionTitle>Blog</StyledSectionTitle>
-				<StyledVerticalGrid>
-					{posts.map((post: Post) => (
-						<BlogItem post={post} key={post.sys.id}/>
-					))}
-				</StyledVerticalGrid>
-			</StyledContent>
-		</Layout>
-	);
+  return (
+    <Layout>
+      <StyledContent>
+        <StyledSectionTitle>Blog</StyledSectionTitle>
+        <StyledVerticalGrid>
+          {posts.map((post: Post) => (
+            <BlogItem post={post} key={post.sys.id}/>
+          ))}
+        </StyledVerticalGrid>
+      </StyledContent>
+    </Layout>
+  );
 }
