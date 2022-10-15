@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { client } from "../helpers/createClient";
 import Link from "next/link";
 import styled from "styled-components";
@@ -73,7 +73,25 @@ const StyledImage = styled.img`
 export default function HomePage({ homeItems }: any) {
 	console.log("landi page items", homeItems);
 	const [latestReviews, setLatestReviews] = useState([]);
+	const [latestBlogPosts, setLatestBlogPosts] = useState([]);
 
+
+	const filterReviewItems = homeItems.filter((item) => item.fields.latestPosts.filter((post) => {
+		console.log(post.sys.contentType.sys.id);
+		switch(post.sys.contentType.sys.id) {
+		case "reviews":
+			console.log("reviews here", post);
+			break;
+		default:
+
+		}
+		// post.sys.contentType.sys.id === "reviews"
+	}));
+	console.log(filterReviewItems);
+	useEffect(() => {
+	//  displayLatestsPostsData();
+	}, []);
+	
 	return (
 		<Layout>
 			<>
@@ -116,14 +134,11 @@ export default function HomePage({ homeItems }: any) {
 										switch (item.sys.contentType.sys.id) {
 										case "reviews":
 											return <ReviewItem review={item} />;
-											break;
 										case "event":
 											return <EventItem event={item} />;
-											break;
 
 										case "post":
 											return <BlogItem post={item} />;
-											break;
 
 										default:
 										}
