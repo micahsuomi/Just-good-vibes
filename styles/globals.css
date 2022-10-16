@@ -25,15 +25,7 @@ p {
   background-repeat: no-repeat;
   background-size: cover;
 }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 3em;
-  background: transparent; 
-  z-index: 2;
-  border-bottom: 1px solid lightgray;
-}
+
 header a {
   text-decoration: none;
   color: rgb(74, 68, 68);
