@@ -137,9 +137,6 @@ export type EventItemProps = {
 export type EventDetailsProps = {
   event: Event;
 };
-export type LayoutProps = {
-  children: any;
-};
 
 export type ContentBodyProps = {
   bodyText: Document;
@@ -201,3 +198,22 @@ export type Home = {
 export type HomeItemsProps = {
   homeItems: Home;
 }
+
+// UI types
+
+export type HeaderProps = {
+  showOverlay: Function;
+}
+
+export type ToggleBarProps = {
+  openNavItems: Function;
+  toggle: boolean;
+}
+
+export type OverlayBackgroundProps = {
+  open: boolean;
+}
+
+export type LayoutProps = {
+  children: any;
+};

@@ -6,26 +6,34 @@ import { MdLocationOn } from "react-icons/md";
 
 import { EventItemProps } from "../types";
 
-
 const StyledEventCard = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 1rem;
   justify-content: center;
   align-items: flex-start;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     grid-template-columns: 50% 50%;
   }
 `;
 
 const StyledEventCardImageWrapper = styled.div`
+    padding: 1.5rem 1.8rem;
+	@media screen and (min-width: 1024px) {
+    padding: 0;
+  }
+
   align-self: center;
 `;
 const StyledEventCardImage = styled.img`
-  width: 500px;
-  height: 350px;
+  height: 100%;
+  width: 100%;
   background-size: cover;
   overflow: hidden;
+  @media screen and (min-width: 1024px) {
+    width: 500px;
+    height: 350px;
+  }
 `;
 const StyledEventCardBody = styled.div`
   padding: 1.5rem 1.8rem;
@@ -62,45 +70,45 @@ const StyledCardIntro = styled.p`
 `;
 
 export const EventItem = ({ event }: EventItemProps) => {
-	const {
-		title,
-		slug,
-		thumbnail: { fields },
-		eventDate,
-		address,
-		location: { lat, lon },
-		intro,
-	} = event.fields;
-	return (
-		<StyledEventCard key={event.sys.id}>
-			<StyledEventCardImageWrapper>
-				<StyledEventCardImage src={fields.file.url} alt={fields.title} />
-			</StyledEventCardImageWrapper>
-			<StyledEventCardBody>
-				<Link href={`/events/${slug}`} passHref>
-					<a>
-						{" "}
-						<StyledEventTitle>{title}</StyledEventTitle>
-					</a>
-				</Link>
-				<StyledEventDate>
-					{moment(eventDate).format("MMMM Do YYYY, h:mm")}
-				</StyledEventDate>
-				<StyledEventAddressWrapper>
-					<Link href={`https://maps.google.com/?q=${lat},${lon}`} passHref>
-						<StyledEventGoogleMapLink
-							target="blank"
-							title="view on google maps"
-						>
-							<>
-								<StyledEventAddress>{address}</StyledEventAddress>
-								<MdLocationOn color="#d83535" />
-							</>
-						</StyledEventGoogleMapLink>
-					</Link>
-				</StyledEventAddressWrapper>
-				<StyledCardIntro>{intro}</StyledCardIntro>
-			</StyledEventCardBody>
-		</StyledEventCard>
-	);
+  const {
+    title,
+    slug,
+    thumbnail: { fields },
+    eventDate,
+    address,
+    location: { lat, lon },
+    intro,
+  } = event.fields;
+  return (
+    <StyledEventCard key={event.sys.id}>
+      <StyledEventCardImageWrapper>
+        <StyledEventCardImage src={fields.file.url} alt={fields.title} />
+      </StyledEventCardImageWrapper>
+      <StyledEventCardBody>
+        <Link href={`/events/${slug}`} passHref>
+          <a>
+            {" "}
+            <StyledEventTitle>{title}</StyledEventTitle>
+          </a>
+        </Link>
+        <StyledEventDate>
+          {moment(eventDate).format("MMMM Do YYYY, h:mm")}
+        </StyledEventDate>
+        <StyledEventAddressWrapper>
+          <Link href={`https://maps.google.com/?q=${lat},${lon}`} passHref>
+            <StyledEventGoogleMapLink
+              target="blank"
+              title="view on google maps"
+            >
+              <>
+                <StyledEventAddress>{address}</StyledEventAddress>
+                <MdLocationOn color="#d83535" />
+              </>
+            </StyledEventGoogleMapLink>
+          </Link>
+        </StyledEventAddressWrapper>
+        <StyledCardIntro>{intro}</StyledCardIntro>
+      </StyledEventCardBody>
+    </StyledEventCard>
+  );
 };
