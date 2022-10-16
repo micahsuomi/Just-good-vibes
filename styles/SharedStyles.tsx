@@ -6,6 +6,21 @@ export const StyledContent = styled.div`
   padding: 20px 20px;
   width: 100%;
   box-sizing: border-box;
+  ${({ isContactForm }) =>
+    isContactForm &&
+    css`
+      margin: 0;
+      padding: 70px 0;
+      background-color: var(--color-text-lightgrey);
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      @media screen and (max-width: 100px) {
+        padding: 120px 170px;
+      }
+    `};
 `;
 
 export const StyledHorizontalGrid = styled.div`
