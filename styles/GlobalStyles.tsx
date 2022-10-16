@@ -5,7 +5,8 @@ export const GlobalStyles = createGlobalStyle`
         --color-text-primary: #1f1e1e;
         --color-text-light: #707070;
         --color-text-darkgrey: #514949;
-        --color-red-purple: #aa2a88;
+        --color-text-lightgrey: #c3c0c0;
+        --color-red-purple: #aa2a64;
         body {
         overflow-x: hidden;
     }
