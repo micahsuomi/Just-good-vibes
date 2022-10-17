@@ -21,6 +21,7 @@ export const StyledContent = styled.div`
       align-items: center;
       flex-direction: column;
       @media screen and (min-width: 1000px) {
+        max-width: 100%;
         padding: 120px 170px;
       }
     `};
@@ -49,7 +50,7 @@ export const StyledSingleContent = styled.div`
     gallery
       ? css`
           max-width: 1000px;
-          margin: 20px auto 80px;
+          margin: 70px auto 80px;
           padding: 50px 150px;
           width: 100%;
           box-sizing: border-box;
