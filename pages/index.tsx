@@ -1,13 +1,21 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import React, { useState, useEffect } from "react";
 import { client } from "../helpers/createClient";
 import Link from "next/link";
 import styled from "styled-components";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import { HomeItemsProps, Home, MixedContentTypes } from "../types";
-import { Layout, ContentBody,EventItem, ReviewItem, BlogItem } from "../components";
-import { StyledContent, StyledHorizontalGrid, StyledVerticalGrid } from "../styles/SharedStyles";
+import {
+  Layout,
+  ContentBody,
+  EventItem,
+  ReviewItem,
+  BlogItem,
+} from "../components";
+import {
+  StyledContent,
+  StyledHorizontalGrid,
+  StyledVerticalGrid,
+} from "../styles/SharedStyles";
 
 export async function getStaticProps() {
   const { items } = await client.getEntries({ content_type: "landingPage" });
@@ -74,11 +82,11 @@ const StyledImage = styled.img`
 `;
 
 const StyledSection = styled.div`
-	margin-top: 7rem;
+  margin-top: 7rem;
 `;
 
 const StyledSectionTitle = styled.h3`
-	color: var(--color-text);
+  color: var(--color-text);
 `;
 
 export default function HomePage({ homeItems }: HomeItemsProps) {
@@ -93,16 +101,16 @@ export default function HomePage({ homeItems }: HomeItemsProps) {
     homeItems.filter((item: Home) => {
       item.fields.latestPosts.filter((post: MixedContentTypes) => {
         switch (post.sys.contentType.sys.id) {
-        case "reviews":
-          arrReviews.push(post);
-          break;
-        case "post":
-          arrBlogPosts.push(post);
-          break;
-        case "event":
-          arrEvents.push(post);
-          break;
-        default:
+          case "reviews":
+            arrReviews.push(post);
+            break;
+          case "post":
+            arrBlogPosts.push(post);
+            break;
+          case "event":
+            arrEvents.push(post);
+            break;
+          default:
         }
       });
     });
@@ -158,32 +166,32 @@ export default function HomePage({ homeItems }: HomeItemsProps) {
                 </div>
                 {latestReviews.length > 0 && (
                   <StyledSection>
-					<StyledSectionTitle>Latest Reviews</StyledSectionTitle>
-					<StyledHorizontalGrid>
-                    {latestReviews.map((item) => (
-                      <ReviewItem key={item.sys.id} review={item} />
-                    ))}
-					</StyledHorizontalGrid>
+                    <StyledSectionTitle>Latest Reviews</StyledSectionTitle>
+                    <StyledHorizontalGrid>
+                      {latestReviews.map((item) => (
+                        <ReviewItem key={item.sys.id} review={item} />
+                      ))}
+                    </StyledHorizontalGrid>
                   </StyledSection>
                 )}
-                 {latestEvents.length > 0 && (
+                {latestEvents.length > 0 && (
                   <StyledSection>
-					<StyledSectionTitle>Latest Events</StyledSectionTitle>
-					<StyledVerticalGrid>
-                    {latestEvents.map((item) => (
-                      <EventItem key={item.sys.id} event={item} />
-                    ))}
-					</StyledVerticalGrid>
+                    <StyledSectionTitle>Latest Events</StyledSectionTitle>
+                    <StyledVerticalGrid>
+                      {latestEvents.map((item) => (
+                        <EventItem key={item.sys.id} event={item} />
+                      ))}
+                    </StyledVerticalGrid>
                   </StyledSection>
                 )}
-				 {latestBlogPosts.length > 0 && (
+                {latestBlogPosts.length > 0 && (
                   <StyledSection>
-					<StyledSectionTitle>Latest Blog Posts</StyledSectionTitle>
-					<StyledVerticalGrid>
-                    {latestBlogPosts.map((item) => (
-                      <BlogItem key={item.sys.id} post={item} />
-                    ))}
-					</StyledVerticalGrid>
+                    <StyledSectionTitle>Latest Blog Posts</StyledSectionTitle>
+                    <StyledVerticalGrid>
+                      {latestBlogPosts.map((item) => (
+                        <BlogItem key={item.sys.id} post={item} />
+                      ))}
+                    </StyledVerticalGrid>
                   </StyledSection>
                 )}
               </>

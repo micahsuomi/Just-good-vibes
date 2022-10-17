@@ -4,12 +4,11 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import styled from "styled-components";
 
 import { AboutPageProps } from "../../types";
-import {Layout} from "../../components";
+import { Layout } from "../../components";
 import { StyledContent } from "../../styles/SharedStyles";
 
 export async function getStaticProps() {
   const { items } = await client.getEntries({ content_type: "about" });
-  console.log("items", items);
   return {
     props: {
       about: items,
@@ -22,7 +21,6 @@ const StyledImage = styled.img`
 `;
 
 export default function AboutPage({ about }: AboutPageProps) {
-  console.log(about);
   return (
     <Layout>
       <StyledContent>

@@ -76,7 +76,6 @@ const StyledIntro = styled.p`
 `;
 
 export default function BlogDetails({ post }: PostDetailsProps) {
-  console.log("from post details", post);
   const {
     fields: {
       title,
