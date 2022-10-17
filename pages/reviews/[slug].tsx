@@ -4,7 +4,7 @@ import styled from "styled-components";
 import moment from "moment";
 
 import { ReviewDetailsProps } from "../../types";
-import { Layout, ContentBody } from "../../components";
+import { Layout, ContentBody, BackToLink } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
@@ -57,9 +57,9 @@ const StyledTitle = styled.h3`
 `;
 
 const StyledDateRating = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const StyledDate = styled.p`
@@ -88,11 +88,8 @@ export default function ReviewDetails({ review }: ReviewDetailsProps) {
       rating,
       description,
     },
-    sys: {
-      createdAt
-    }
-  }
-    = review;
+    sys: { createdAt },
+  } = review;
   return (
     <Layout>
       <StyledSingleContent>
@@ -107,15 +104,11 @@ export default function ReviewDetails({ review }: ReviewDetailsProps) {
             <StyledDate>
               {moment(createdAt).format("MMMM Do YYYY, h:mm")}
             </StyledDate>
-            <StyledRating>
-            Rating: {rating}
-            </StyledRating>
+            <StyledRating>Rating: {rating}</StyledRating>
           </StyledDateRating>
-         
-          <StyledIntro>
-            {excerpt}
-          </StyledIntro>
+          <StyledIntro>{excerpt}</StyledIntro>
           <ContentBody bodyText={description} />
+          <BackToLink hrefLink="/reviews" text="Back to reviews" />
         </StyledWrapper>
       </StyledSingleContent>
     </Layout>
