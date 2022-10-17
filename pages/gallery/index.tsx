@@ -6,7 +6,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { client } from "../../helpers/createClient";
 import { GalleryPhotos } from "../../types";
 import { Layout } from "../../components";
-import { StyledContent } from "../../styles/SharedStyles";
+import { StyledContent, StyledSectionTitle } from "../../styles/SharedStyles";
 
 export async function getStaticProps() {
   const { items } = await client.getEntries({ content_type: "gallery" });
@@ -26,7 +26,9 @@ const StyledCard = styled.div`
   position: relative;
 `;
 
-const StyledCardImageWrapper = styled.div` overflow: hidden;`;
+const StyledCardImageWrapper = styled.div`
+  overflow: hidden;
+`;
 const StyledCardImage = styled.img`
   width: 100%;
   overflow: hidden;
@@ -58,11 +60,10 @@ const StyledCardTitle = styled.h5`
 `;
 
 export default function GalleryPage({ gallery }: GalleryPhotos) {
-  console.log(gallery);
   return (
     <Layout>
       <StyledContent>
-        <h3>Gallery</h3>
+        <StyledSectionTitle>Gallery</StyledSectionTitle>
         <ResponsiveMasonry
           //   columsCount={2}
           columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}

@@ -1,5 +1,3 @@
-import { JsxAttribute } from "typescript";
-
 export type Review = {
   fields: {
     title: string;
@@ -36,7 +34,7 @@ export type Reviews = {
 
 export type ReviewItemProps = {
   review: Review;
-}
+};
 
 export type ReviewDetailsProps = {
   review: Review;
@@ -75,7 +73,7 @@ export interface PostItemProps {
 
 export type PostDetailsProps = {
   post: Post;
-}
+};
 
 export type GalleryPhoto = {
   fields: {
@@ -87,7 +85,7 @@ export type GalleryPhoto = {
   };
   sys: {
     id: string;
-  }
+  };
 };
 
 export type GalleryPhotos = {
@@ -140,21 +138,21 @@ export type EventDetailsProps = {
 
 export type ContentBodyProps = {
   bodyText: Document;
-}
+};
 
 export type About = {
   map: any;
   fields: {
     title: string;
     slug: string;
-    featuredImage: FeaturedImage
+    featuredImage: FeaturedImage;
     description: string;
-  }
-}
+  };
+};
 
 export type AboutPageProps = {
   about: About;
-}
+};
 
 export type ThumbnailImage = {
   fields: {
@@ -163,7 +161,7 @@ export type ThumbnailImage = {
     };
     title: string;
   };
-}
+};
 
 export type FeaturedImage = {
   map: Function;
@@ -178,8 +176,8 @@ export type FeaturedImage = {
 export type MixedContentTypes = {
   sys: any;
   filter: any;
-  post: [Review] | [Post] | [Event] | [GalleryPhoto]
-} 
+  post: [Review] | [Post] | [Event] | [GalleryPhoto];
+};
 
 export type Home = {
   [x: string]: any;
@@ -192,28 +190,45 @@ export type Home = {
   };
   sys: {
     id: string;
-  }
-}
+  };
+};
 
 export type HomeItemsProps = {
   homeItems: Home;
-}
+};
 
 // UI types
 
 export type HeaderProps = {
   showOverlay: Function;
-}
+};
 
 export type ToggleBarProps = {
   openNavItems: Function;
   toggle: boolean;
-}
+};
 
 export type OverlayBackgroundProps = {
   open: boolean;
-}
+};
 
 export type LayoutProps = {
   children: any;
+};
+
+export type Form = {
+  fields: {
+    title: string;
+    description: string;
+    formToken: string;
+  }
+  sys: {
+    id: string;
+  }
+};
+export type Contact = {
+  formItems: [Form];
+};
+export type ContactFormProps = {
+  token: string;
 };

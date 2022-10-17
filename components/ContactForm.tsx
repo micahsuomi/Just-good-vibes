@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
-
 import styled from "styled-components";
+
+import { ContactFormProps } from "../types";
 
 const StyledForm = styled.form`
   display: flex;
@@ -9,7 +10,6 @@ const StyledForm = styled.form`
   align-items: center;
   flex-direction: column;
   padding: 3rem 2.34rem;
-  border: 1px solid var(--color-text-light);
   background-color: #fff;
   max-width: 100%;
   border-radius: 5px;
@@ -49,26 +49,40 @@ const StyledTextArea = styled.textarea`
 `;
 
 const StyledSubmit = styled.button`
-  width: 60%;
-  padding: 0.7rem;
+  width: 93%;
+  padding: 0.9rem;
   border: none;
   background-color: var(--color-red-purple);
   color: #fff;
   font-weight: 700;
   cursor: pointer;
-  border-radius: 5px;
   border-radius: 10px;
-
+  box-shadow: 0.3rem 0.2rem 1rem rgba(99, 95, 95, 0.5);
   :hover {
     transform: scale(1.01);
     transition: 0.1s ease-in-out;
   }
 `;
-export const ContactForm = ({ token }) => {
-  // console.log(process.env)
+
+const StyledThankyouMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 3rem 2.34rem;
+  border: 1px solid var(--color-text-light);
+  background-color: #fff;
+  max-width: 100%;
+  border-radius: 5px;
+  height: 500px;
+  width: 400px;
+`;
+export const ContactForm = ({ token }: ContactFormProps) => {
   const [state, handleSubmit] = useForm(token);
   if (state.succeeded) {
-    return <p>Thanks for contacting us!</p>;
+    return (
+      <StyledThankyouMessage>Thanks for contacting us!</StyledThankyouMessage>
+    );
   }
   return (
     <StyledForm onSubmit={handleSubmit}>
@@ -79,6 +93,7 @@ export const ContactForm = ({ token }) => {
           type="email"
           name="email"
           placeholder="your email address"
+          required
         />
 
         <ValidationError prefix="Email" field="email" errors={state.errors} />
@@ -89,6 +104,7 @@ export const ContactForm = ({ token }) => {
           id="message"
           name="message"
           placeholder="write your message here"
+          required
         />
         <ValidationError
           prefix="Message"

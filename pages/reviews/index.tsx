@@ -4,7 +4,11 @@ import styled from "styled-components";
 
 import { Reviews, Review } from "../../types";
 import { Layout, ReviewItem } from "../../components";
-import { StyledContent, StyledHorizontalGrid } from "../../styles/SharedStyles";
+import {
+  StyledContent,
+  StyledSectionTitle,
+  StyledHorizontalGrid,
+} from "../../styles/SharedStyles";
 
 export async function getStaticProps() {
   const { items } = await client.getEntries({ content_type: "reviews" });
@@ -19,10 +23,10 @@ export default function ReviewsPage({ reviews }: Reviews) {
   return (
     <Layout>
       <StyledContent>
-        <h3>Reviews</h3>
+        <StyledSectionTitle>Reviews</StyledSectionTitle>
         <StyledHorizontalGrid>
           {reviews.map((reviewItem: Review) => {
-            return <ReviewItem review={reviewItem} key={reviewItem.sys.id}/>;
+            return <ReviewItem review={reviewItem} key={reviewItem.sys.id} />;
           })}
         </StyledHorizontalGrid>
       </StyledContent>

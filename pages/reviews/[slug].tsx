@@ -75,7 +75,6 @@ const StyledIntro = styled.p`
 `;
 
 export default function ReviewDetails({ review }: ReviewDetailsProps) {
-  console.log(review);
   const {
     fields: {
       title,

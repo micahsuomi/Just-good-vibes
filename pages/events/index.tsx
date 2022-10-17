@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Events, Event } from "../../types";
 import { EventItem, Layout } from "../../components";
-import { StyledContent } from "../../styles/SharedStyles";
+import { StyledContent, StyledSectionTitle } from "../../styles/SharedStyles";
 
 export async function getStaticProps() {
   const { items } = await client.getEntries({ content_type: "event" });
@@ -25,9 +25,10 @@ export default function EventsPage({ events }: Events) {
   return (
     <Layout>
       <StyledContent>
+        <StyledSectionTitle>Events</StyledSectionTitle>
         <StyledGrid>
           {events.map((event: Event) => (
-            <EventItem event={event} key={event.sys.id}/>
+            <EventItem event={event} key={event.sys.id} />
           ))}
         </StyledGrid>
       </StyledContent>

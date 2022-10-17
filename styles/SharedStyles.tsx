@@ -17,10 +17,14 @@ export const StyledContent = styled.div`
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      @media screen and (max-width: 100px) {
+      @media screen and (min-width: 1000px) {
         padding: 120px 170px;
       }
     `};
+`;
+
+export const StyledSectionTitle = styled.h3`
+  color: var(--color-text-primary);
 `;
 
 export const StyledHorizontalGrid = styled.div`
