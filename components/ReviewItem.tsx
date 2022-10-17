@@ -23,9 +23,12 @@ const StyledCardImageWrapper = styled.div`
 `;
 const StyledCardImage = styled.img`
   width: 100%;
-  height: 320px;
+  height: 100%;
   background-size: cover;
   overflow: hidden;
+  @media screen and (min-width: 670px) {
+    height: 250px;
+  }
 `;
 const StyledCardBody = styled.div`
   padding: 1.5rem 1.8rem;
@@ -49,32 +52,32 @@ const StyledCardIntro = styled.p`
 `;
 
 export const ReviewItem = ({ review }: ReviewItemProps) => {
-	const {
-		title,
-		slug,
-		thumbnail: { fields },
-		rating,
-		excerpt,
-	} = review.fields;
-	return (
-		<Link href={`/reviews/${slug}`} passHref>
-			<StyledLink>
-				<StyledCard key={review.sys.id}>
-					<StyledCardImageWrapper>
-						<StyledCardImage src={fields.file.url} alt={fields.title} />
-					</StyledCardImageWrapper>
-					<StyledCardBody>
-						<StyledDate>
-							{moment(review.sys.createdAt).format("MMMM Do YYYY, h:mm")}
-						</StyledDate>
+  const {
+    title,
+    slug,
+    thumbnail: { fields },
+    rating,
+    excerpt,
+  } = review.fields;
+  return (
+    <Link href={`/reviews/${slug}`} passHref>
+      <StyledLink>
+        <StyledCard key={review.sys.id}>
+          <StyledCardImageWrapper>
+            <StyledCardImage src={fields.file.url} alt={fields.title} />
+          </StyledCardImageWrapper>
+          <StyledCardBody>
+            <StyledDate>
+              {moment(review.sys.createdAt).format("MMMM Do YYYY, h:mm")}
+            </StyledDate>
 
-						<StyledTitle>{title}</StyledTitle>
+            <StyledTitle>{title}</StyledTitle>
 
-						<StyledRating>Rating: {rating}/5</StyledRating>
-						<StyledCardIntro>{excerpt}</StyledCardIntro>
-					</StyledCardBody>
-				</StyledCard>
-			</StyledLink>
-		</Link>
-	);
+            <StyledRating>Rating: {rating}/5</StyledRating>
+            <StyledCardIntro>{excerpt}</StyledCardIntro>
+          </StyledCardBody>
+        </StyledCard>
+      </StyledLink>
+    </Link>
+  );
 };
