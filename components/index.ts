@@ -1,3 +1,4 @@
+export * from "./BackToLink";
 export * from "./BlogItem";
 export * from "./ContactForm";
 export * from "./ContentBody";

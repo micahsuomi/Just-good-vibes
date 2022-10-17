@@ -1,11 +1,14 @@
 import styled, { css } from "styled-components";
 
 export const StyledContent = styled.div`
-  max-width: 1200px;
+  max-width: 700px;
   margin: 20px auto 80px;
-  padding: 20px 20px;
+  padding: 120px 20px;
   width: 100%;
   box-sizing: border-box;
+  @media screen and (min-width: 1012px) {
+    max-width: 1200px;
+  }
   ${({ isContactForm }) =>
     isContactForm &&
     css`
@@ -52,10 +55,10 @@ export const StyledSingleContent = styled.div`
           box-sizing: border-box;
         `
       : css`
-          margin: 20px auto 80px;
+          margin: 70px auto 80px;
           width: 100%;
           box-sizing: border-box;
-          padding: 10px 20px;
+          padding: 50px 20px;
 
           @media screen and (min-width: 768px) {
             padding: 50px 100px;

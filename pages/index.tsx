@@ -30,7 +30,6 @@ const StyledHeroContainer = styled.div`
   height: 100vh;
   width: 100vw;
   position: relative;
-  margin-top: -5rem;
 `;
 
 const StyledHeroBody = styled.div`
