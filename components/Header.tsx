@@ -29,7 +29,7 @@ const StyledHeaderWrapper = styled.nav`
         `};
 `;
 
-const StyledLogo = styled.h4`
+const StyledLogo = styled.h2`
   margin: 1rem 0;
 `;
 
@@ -130,7 +130,11 @@ export const Header = ({ showOverlay }: HeaderProps) => {
   return (
     <StyledHeaderWrapper className="nav-bar" pinned={!unpinNav}>
       <div>
-        <StyledLogo>Good Vibes</StyledLogo>
+        <Link href="/" passHref>
+          <StyledNavLink>
+            <StyledLogo>Good Vibes</StyledLogo>
+          </StyledNavLink>
+        </Link>
       </div>
       <ToggleBar openNavItems={openNavItems} toggle={toggle} />
       <StyledNavList showing={toggle}>

@@ -6,8 +6,7 @@ import moment from "moment";
 import { MdLocationOn } from "react-icons/md";
 
 import { EventDetailsProps } from "../../types";
-import { Layout } from "../../components";
-import { ContentBody } from "../../components";
+import { Layout, ContentBody, BackToLink } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
@@ -128,6 +127,7 @@ export default function EventDetails({ event }: EventDetailsProps) {
             </StyledAddressWrapper>
             <StyledIntro>{intro}</StyledIntro>
             <ContentBody bodyText={eventDescription} />
+            <BackToLink hrefLink="/events" text="Back to events" />
           </StyledBody>
         </StyledWrapper>
       </StyledSingleContent>
