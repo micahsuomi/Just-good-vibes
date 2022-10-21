@@ -3,7 +3,7 @@ import { client } from "../../helpers/createClient";
 import styled from "styled-components";
 
 import { PostDetailsProps } from "../../types";
-import { Layout, ContentBody } from "../../components";
+import { Layout, ContentBody, BackToLink } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
@@ -104,6 +104,7 @@ export default function BlogDetails({ post }: PostDetailsProps) {
           <StyledIntro>{intro}</StyledIntro>
           <StyledReadingTime>Reading time: {readingTime}</StyledReadingTime>
           <ContentBody bodyText={description} />
+          <BackToLink hrefLink="/blog" text="Back to blog" />
         </StyledPostWrapper>
       </StyledSingleContent>
     </Layout>

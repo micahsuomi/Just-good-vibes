@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { client } from "../helpers/createClient";
-import Link from "next/link";
 import styled from "styled-components";
 
 import { HomeItemsProps, Home, MixedContentTypes } from "../types";
@@ -30,7 +29,6 @@ const StyledHeroContainer = styled.div`
   height: 100vh;
   width: 100vw;
   position: relative;
-  margin-top: -5rem;
 `;
 
 const StyledHeroBody = styled.div`
@@ -57,11 +55,7 @@ const StyledHeroButton = styled.button`
   width: 15rem;
   border-radius: 2px;
   cursor: pointer;
-  a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-  }
+  color: #fff;
   :hover {
     background-color: #222020;
     transform: scale(1.04);
@@ -129,6 +123,12 @@ export default function HomePage({ homeItems }: HomeItemsProps) {
     }
   }, []);
 
+  const scrollToFirstSection = () => {
+    window.scrollTo({
+      top: document.querySelector(".hero").scrollHeight,
+      behavior: "smooth",
+    });
+  };
   return (
     <Layout>
       <>
@@ -138,10 +138,8 @@ export default function HomePage({ homeItems }: HomeItemsProps) {
             <StyledHeroSubHeader>
               Where the good feelings happen
             </StyledHeroSubHeader>
-            <StyledHeroButton>
-              <Link href="section-landing" passHref>
-                <a>Read More</a>
-              </Link>
+            <StyledHeroButton onClick={scrollToFirstSection}>
+              Read More
             </StyledHeroButton>
           </StyledHeroBody>
         </StyledHeroContainer>

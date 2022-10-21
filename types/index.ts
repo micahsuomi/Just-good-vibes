@@ -1,28 +1,26 @@
+
+export type ContentType = {
+  sys: {
+    contentType: {
+      sys: {
+        id: string;
+      };
+    };
+  };
+};
+
 export type Review = {
   fields: {
     title: string;
     slug: string;
-    thumbnail: {
-      fields: {
-        file: {
-          url: string;
-        };
-        title: string;
-      };
-    };
+    thumbnail: ThumbnailImage;
     rating: string;
     excerpt: string;
-    featuredImage: {
-      fields: {
-        file: {
-          url: string;
-        };
-        title: string;
-      };
-    };
+    featuredImage: FeaturedImage;
     description: string;
   };
   sys: {
+    contentType: ContentType;
     id: string;
     createdAt: string;
   };
@@ -44,14 +42,7 @@ export type Post = {
   fields: {
     title: string;
     slug: string;
-    thumbnail: {
-      fields: {
-        file: {
-          url: string;
-        };
-        title: string;
-      };
-    };
+    thumbnail: ThumbnailImage;
     intro: string;
     featuredImage: FeaturedImage;
     description: string;
@@ -85,6 +76,7 @@ export type GalleryPhoto = {
   };
   sys: {
     id: string;
+    contentType: ContentType;
   };
 };
 
@@ -102,14 +94,7 @@ export type Event = {
     slug: string;
     eventDate: string;
     eventDescription: string;
-    thumbnail: {
-      fields: {
-        file: {
-          url: string;
-        };
-        title: string;
-      };
-    };
+    thumbnail: ThumbnailImage;
     address: string;
     location: {
       lat: string;

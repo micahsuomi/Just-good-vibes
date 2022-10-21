@@ -4,7 +4,7 @@ import { client } from "../../helpers/createClient";
 import styled from "styled-components";
 
 import { GalleryPhotoDetailsProps } from "../../types";
-import { Layout } from "../../components";
+import { Layout, BackToLink } from "../../components";
 import { StyledSingleContent } from "../../styles/SharedStyles";
 
 export async function getStaticPaths() {
@@ -37,6 +37,19 @@ const StyledImage = styled.img`
   width: 100%;
 `;
 
+const StyledTitle = styled.h3`
+  color: var(--color-text-primary);
+`;
+
+const StyledDescription = styled.p`
+  color: var(--color-text-light);
+  line-height: 1.6;
+`;
+
+const StyledLink = styled.a`
+  font-size: 16px;
+`;
+
 export default function GalleryPhotoDetails({
   photo: {
     fields: {
@@ -49,6 +62,7 @@ export default function GalleryPhotoDetails({
       shortDescription,
       linkToInstagram,
     },
+    sys,
   },
 }: GalleryPhotoDetailsProps) {
   return (
@@ -56,15 +70,15 @@ export default function GalleryPhotoDetails({
       <StyledSingleContent gallery={true}>
         <div>
           <StyledImage src={url} />
-          <h2>{title}</h2>
-          <p>{shortDescription}</p>
-          <a>{linkToInstagram}</a>
-        </div>
-        <div>
-          <Link href="/gallery" passHref>
-            <a>Back to photos</a>
+          <StyledTitle>{title}</StyledTitle>
+          <StyledDescription>{shortDescription}</StyledDescription>
+          <Link href={linkToInstagram} passHref>
+            <StyledLink>
+            {linkToInstagram}
+            </StyledLink>
           </Link>
         </div>
+        <BackToLink hrefLink="gallery" text="Back to gallery" />
       </StyledSingleContent>
     </Layout>
   );
