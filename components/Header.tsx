@@ -27,10 +27,16 @@ const StyledHeaderWrapper = styled.nav`
           transform: translateY(-100%);
           transition: 0.3s ease-in-out;
         `};
+  @media screen and (max-width: 500px) {
+    padding: 0.3rem 0.4rem;
+  }
 `;
 
 const StyledLogo = styled.h2`
   margin: 1rem 0;
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+  }
 `;
 
 const StyledNavList = styled.ul`
